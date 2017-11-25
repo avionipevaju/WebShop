@@ -1,3 +1,36 @@
-<p>
-  Dashboard Placeholder
-</p>
+<div class="row text-center">
+  <div class="col-sm-6 text-center">
+    <div class="panel panel-default listPanel">
+      <div class="panel-heading text-center">Product List</div>
+      <table class="table-striped text-center">
+        <th class="col-xs-1">ID</th>
+        <th class="col-xs-3">Naziv</th>
+        <th class="col-xs-3">Cena</th>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-sm-6 text-center">
+    <div class="panel panel-default listPanel">
+      <div class="panel-heading">Shopping Cart</div>
+      <table class="table-striped text-center" id="cart">
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row text-center">
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-primary">Add to cart</button>
+  </div>
+  <div class="col-sm-2">
+    <input type="text" class="form-control text-center" id="selected" size="15" disabled>
+  </div>
+  <div class="col-sm-2">
+    Quantity:<input type="text" id="quantity" size="1">
+  </div>
+
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-primary">Buy products</button>
+  </div>
+</div>
