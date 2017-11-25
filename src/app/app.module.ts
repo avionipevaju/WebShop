@@ -6,17 +6,20 @@ import { RouterModule, Routes} from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
-  {path: '', component: LoginComponent}
+  {path: '', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
