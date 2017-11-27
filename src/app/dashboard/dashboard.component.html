@@ -6,6 +6,11 @@
         <th class="col-xs-1">ID</th>
         <th class="col-xs-3">Naziv</th>
         <th class="col-xs-3">Cena</th>
+        <tr *ngFor="let product of products" (click)="selectProduct(product)">
+          <td class="col-sm-4"> {{product.id}} </td>
+          <td class="col-sm-4"> {{product.name}} </td>
+          <td class="col-sm-4"> {{product.price}} </td>
+        </tr>
       </table>
     </div>
   </div>
@@ -21,7 +26,7 @@
 
 <div class="row text-center">
   <div class="col-sm-2">
-    <button type="button" class="btn btn-primary">Add to cart</button>
+    <button (click)="addToCart()" type="button" class="btn btn-primary">Add to cart</button>
   </div>
   <div class="col-sm-2">
     <input type="text" class="form-control text-center" id="selected" size="15" disabled>
