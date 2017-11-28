@@ -24,6 +24,14 @@ export class DashboardComponent implements OnInit {
         }
         console.log(this.products);
       });
+
+    this.http.get('http://localhost:8080/WebShopDWP/rest/user/current')
+      .subscribe(data => {
+        console.log(this.products);
+        let current: String = data['status'];
+        current === 'null' ? current = 'Guest' : current = data['status'];
+        this.currentUser = current;
+      });
   }
 
   selectProduct(item): void {
