@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-transaction',
@@ -7,14 +8,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   confirmBuy(): void {
+    let shoppingCart: Object[] = [];
+    shoppingCart = JSON.parse(sessionStorage.getItem('cart'));
+    shoppingCart.forEach(element => {
+        element['user'] = sessionStorage.getItem('user');
+    });
+    sessionStorage.setItem('cart', JSON.stringify(shoppingCart));
+    const location = document.getElementById('location') as HTMLInputElement;
+    if (location.value === '') {
+      alert('Fields not filled correctly');
+      return;
+    }
     const ccn = document.getElementById('ccn') as HTMLInputElement;
-    alert(this.validCreditCard(ccn.value));
+    if (!this.validCreditCard(ccn.value) || ccn.value === '') {
+      alert('Credit card number not valid! Try again');
+      return;
+    }
+    this.http.post('http://localhost:8080/WebShopDWP/rest/products/store', sessionStorage.getItem('cart'),
+      {headers: {'Content-Type': 'application/json'}})
+      .subscribe(data => {
+        console.log(data['status']);
+        if (data['status'] === 'OK') {
+          alert('Transaction successful');
+        }else {
+          alert('Transaction failed. Try again');
+        }
+      });
   }
 
   validCreditCard(value) {

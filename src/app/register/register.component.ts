@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
         if (data['status'] === 'OK') {
           alert('Registration successful');
           this.router.navigate(['/']);
+        } else {
+          alert('The user alerady exists');
         }
       });
   }

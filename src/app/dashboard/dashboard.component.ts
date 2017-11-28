@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -23,10 +23,8 @@ export class DashboardComponent implements OnInit {
         for (const prod in data) {
           this.products[i++] = data[prod];
         }
-        console.log(this.products);
       });
         let current: String = sessionStorage.getItem('user');
-        console.log(current);
         current === null ? current = 'Guest' : current = sessionStorage.getItem('user');
         this.currentUser = current;
         const sc: String = JSON.parse(sessionStorage.getItem('cart'));
@@ -56,7 +54,8 @@ export class DashboardComponent implements OnInit {
     const selected = document.getElementById('selected') as HTMLInputElement;
     const quantity = document.getElementById('quantity') as HTMLInputElement;
 
-    if (selected.value === '' || quantity.value === '' || isNaN((Number)(quantity.value))) {
+    if (selected.value === '' || quantity.value === '' || isNaN((Number)(quantity.value)) ||
+      !Number.isInteger(Number(quantity.value))) {
       alert('Fields not filled correctly');
     }else {
       let price: number;
