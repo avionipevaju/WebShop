@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('user') != 'null') {
+    if (sessionStorage.getItem('user') != null) {
       this.router.navigate(['/dashboard']);
     }
   }

@@ -25,22 +25,33 @@ export class DashboardComponent implements OnInit {
         }
         console.log(this.products);
       });
-
-        //console.log(this.products);
         let current: String = sessionStorage.getItem('user');
-        current === 'null' ? current = 'Guest' : current = sessionStorage.getItem('user');
+        console.log(current);
+        current === null ? current = 'Guest' : current = sessionStorage.getItem('user');
         this.currentUser = current;
+        const sc: String = JSON.parse(sessionStorage.getItem('cart'));
+        if (sc !== null) {
+          this.shoppingCart = JSON.parse(sessionStorage.getItem('cart'));
+        }
   }
 
   selectProduct(item): void {
     const selected = document.getElementById('selected') as HTMLInputElement;
     selected.value = item.name;
   }
-  addToCart(): void {
-    const cart = document.getElementById('cart');
 
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
+  deleteProduct(item): void {
+    console.log(item);
+    const shoppingCartTemp: Object[] = [];
+    for (const product in this.shoppingCart) {
+      if (this.shoppingCart[product]['name'] !== item['name']) {
+        shoppingCartTemp.push(this.shoppingCart[product]);
+      }
+    }
+    this.shoppingCart = shoppingCartTemp;
+  }
+
+  addToCart(): void {
     const selected = document.getElementById('selected') as HTMLInputElement;
     const quantity = document.getElementById('quantity') as HTMLInputElement;
 
@@ -56,25 +67,23 @@ export class DashboardComponent implements OnInit {
           this.shoppingCart.push(temp);
         }
       });
-      const txt = document.createTextNode('Name: ' + selected.value + ' | Quantity: ' +
-        quantity.value + ' | Price: ' + price * (Number)(quantity.value) );
-
-      td.appendChild(txt);
-      tr.appendChild(td);
-      cart.appendChild(tr);
-
-      console.log(this.shoppingCart);
+      sessionStorage.setItem('cart', JSON.stringify(this.shoppingCart));
     }
 
 
   }
 
   buyProducts() {
-    this.router.navigate(['/dashboard', {outlets: {'buy': ['transaction']}}]);
+    if (sessionStorage.getItem('user') != null) {
+      this.router.navigate(['/dashboard', {outlets: {'buy': ['transaction']}}]);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   logout() {
-    sessionStorage.setItem('user', 'null');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('cart');
     this.router.navigate(['/']);
   }
 }

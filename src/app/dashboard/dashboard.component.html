@@ -29,6 +29,14 @@
     <div class="panel panel-default listPanel">
       <div class="panel-heading">Shopping Cart</div>
       <table class="table-striped text-center" id="cart">
+        <th class="col-xs-1">Name</th>
+        <th class="col-xs-3">Quantity</th>
+        <th class="col-xs-3">Price</th>
+        <tr *ngFor="let product of shoppingCart" (click)="deleteProduct(product)">
+          <td class="col-sm-4"> {{product.name}} </td>
+          <td class="col-sm-4"> {{product.quantity}} </td>
+          <td class="col-sm-4"> {{product.price *product.quantity}} </td>
+        </tr>
       </table>
     </div>
   </div>
