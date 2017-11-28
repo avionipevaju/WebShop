@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   shoppingCart: Object[] = [];
   currentUser: String = 'Guest';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.http.get('http://localhost:8080/WebShopDWP/rest/products')
@@ -69,6 +70,10 @@ export class DashboardComponent implements OnInit {
     }
 
 
+  }
+
+  buyProducts() {
+    this.router.navigate(['/dashboard', {outlets: {'buy': ['transaction']}}]);
   }
 
 }

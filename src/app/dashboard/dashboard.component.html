@@ -46,6 +46,9 @@
   </div>
 
   <div class="col-sm-6">
-    <button type="button" class="btn btn-primary">Buy products</button>
+    <button (click)="buyProducts()" type="button" class="btn btn-primary">Buy products</button>
   </div>
+</div>
+<div class="row">
+  <router-outlet name="buy"></router-outlet>
 </div>
