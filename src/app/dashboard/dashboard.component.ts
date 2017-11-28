@@ -11,6 +11,7 @@ export class DashboardComponent implements OnInit {
 
   products: Object[] = [];
   shoppingCart: Object[] = [];
+  currentUser: String = 'Guest';
 
   constructor(private http: HttpClient) { }
 
