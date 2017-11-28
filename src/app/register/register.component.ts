@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
         console.log(data['status']);
         if (data['status'] === 'OK') {
           alert('Registration successful');
-          this.router.navigate(['./dashboard']);
+          this.router.navigate(['/']);
         }
       });
   }

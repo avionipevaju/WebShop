@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
       {headers: {'Content-Type': 'application/json'}})
       .subscribe(data => {
         console.log(data['status']);
-        if (data['status'] === 'OK') {
+        if (data['status'] !== 'FAIL') {
+          sessionStorage.setItem('user', data['status']);
           this.router.navigate(['./dashboard']);
         }else {
           alert('Login failed');
@@ -27,6 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (sessionStorage.getItem('user') != 'null') {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
 }

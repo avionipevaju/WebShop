@@ -26,13 +26,10 @@ export class DashboardComponent implements OnInit {
         console.log(this.products);
       });
 
-    this.http.get('http://localhost:8080/WebShopDWP/rest/user/current')
-      .subscribe(data => {
-        console.log(this.products);
-        let current: String = data['status'];
-        current === 'null' ? current = 'Guest' : current = data['status'];
+        //console.log(this.products);
+        let current: String = sessionStorage.getItem('user');
+        current === 'null' ? current = 'Guest' : current = sessionStorage.getItem('user');
         this.currentUser = current;
-      });
   }
 
   selectProduct(item): void {
@@ -76,4 +73,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/dashboard', {outlets: {'buy': ['transaction']}}]);
   }
 
+  logout() {
+    sessionStorage.setItem('user', 'null');
+    this.router.navigate(['/']);
+  }
 }
