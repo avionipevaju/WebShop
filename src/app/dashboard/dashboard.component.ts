@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit {
       }
     }
     this.shoppingCart = shoppingCartTemp;
+    sessionStorage.setItem('cart', JSON.stringify(this.shoppingCart));
   }
 
   addToCart(): void {
