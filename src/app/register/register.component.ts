@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
     const usernameField = document.getElementById('username') as HTMLInputElement;
     const passwordField = document.getElementById('password') as HTMLInputElement;
-    const json = {'username': usernameField.value, 'password': passwordField.value};
+    const emailField = document.getElementById('email') as HTMLInputElement;
+    const json = {'username': usernameField.value, 'password': passwordField.value, 'email': emailField.value};
     this.http.post('http://localhost:8080/WebShopDWP/rest/user/register', JSON.stringify(json),
       {headers: {'Content-Type': 'application/json'}})
       .subscribe(data => {
